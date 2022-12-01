@@ -57,6 +57,11 @@ public class WorkspaceController {
 		List<WorkspaceDto> workspaces = workspaceService.getAllWorkspace(userId);
 		return ResponseEntity.ok(workspaces);
 	}
+	@GetMapping(value = "/workspace/getWorkspace/{id}", produces = "application/json")
+	public ResponseEntity<WorkspaceDto> selectWorkspaceByWorkspaceId(@PathVariable Long id) {
+		WorkspaceDto dto = workspaceService.getWorkspaceByWorkspaceId(id);
+		return ResponseEntity.ok(dto);
+	}
 
 	@PutMapping(value = "/workspace/{workspaceId}", produces = "application/json")
 	public ResponseEntity<Boolean> updateWorkspacec(@PathVariable Long workspaceId, @RequestBody Workspace workspace) {
@@ -80,5 +85,13 @@ public class WorkspaceController {
 		}
 		return ResponseEntity.ok(true);
 	}
+
+	@GetMapping(value = "/workspace/generateWorkspaceMemberById/{workspaceId}", produces = "application/json")
+	public ResponseEntity<WorkspaceDto> showWorkspaceMemberById(@PathVariable Long workspaceId) {
+
+		WorkspaceDto dto = workspaceService.generateWorkspaceMemberByWorkspaceId(workspaceId);
+		return ResponseEntity.ok(dto);
+	}
+	
 
 }
